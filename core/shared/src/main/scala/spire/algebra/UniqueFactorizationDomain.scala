@@ -31,7 +31,7 @@ object UniqueFactorizationDomain {
     def unit: A = safeLongFactors.sign match {
       case Sign.Negative => CRing[A].negate(CRing[A].one)
       case Sign.Positive => CRing[A].one
-      case _ => sys.error("Factorization of zero is undefined.")
+      case _ => throw new ArithmeticException("Factorization of zero is undefined.")
     }
     override def elements: Map[A, Int] = safeLongFactors.elements.map {
       case (f, exp) => ((CRing[A].fromBigInt(f.toBigInt), exp))
